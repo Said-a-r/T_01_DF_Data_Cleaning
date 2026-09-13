@@ -1,0 +1,44 @@
+{
+	"name": "repartidores_sql",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSQL",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "sql"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "repartidor_id",
+				"type": "varchar"
+			},
+			{
+				"name": "nombre_repartidor",
+				"type": "varchar"
+			},
+			{
+				"name": "tipo_vehiculo",
+				"type": "varchar"
+			},
+			{
+				"name": "ciudad_base",
+				"type": "varchar"
+			},
+			{
+				"name": "fecha_alta",
+				"type": "date"
+			},
+			{
+				"name": "activo",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "repartidores"
+		}
+	}
+}
