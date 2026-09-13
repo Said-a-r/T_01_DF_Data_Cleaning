@@ -30,9 +30,6 @@
 				},
 				{
 					"name": "derivedColumn2"
-				},
-				{
-					"name": "derivedColumn3"
 				}
 			],
 			"scriptLines": [
@@ -48,7 +45,8 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"derivedColumn2 split(ERROR_FUNCTION(''),",
+				"derivedColumn2 split((!isNull(cantidad) && !isNull(precio_unitario) && !isNull(descuento_linea) && !isNull(total_linea) ) &&",
+				"( isInteger(cantidad) || isDecimal(precio_unitario) || isDecimal(descuento_linea) || isDecimal(total_linea)),",
 				"     disjoint: false) ~> split1@(valido, rechazado)",
 				"split1@valido derive(cantidad = toInteger(cantidad),",
 				"          precio_unitario = toDecimal(precio_unitario),",
@@ -57,7 +55,6 @@
 				"source1 derive(precio_unitario = replace(replace(trim(precio_unitario),'Bs',''),',','.'),",
 				"          descuento_linea = replace(replace(trim(precio_unitario),'Bs',''),',','.'),",
 				"          total_linea = replace(replace(trim(precio_unitario),'Bs',''),',','.')) ~> derivedColumn2",
-				"split1@rechazado derive() ~> derivedColumn3",
 				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
